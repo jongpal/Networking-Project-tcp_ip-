@@ -1,0 +1,34 @@
+#ifndef __TCPCONST__
+#define __TCPCONST__
+
+// Layer 2
+#define ETH_IP 0x0800
+#define ARP_REQUEST 1
+#define ARP_REPLY 2
+#define ARP_MSG_TYPE 806
+#define BROADCAST_MAC 0xFFFFFFFFFF
+
+// Layer3
+#define ICMP 1
+#define IP_IN_IP 4
+// ICMP type
+#define ICMP_ROUTER_SOLICITATION 10
+#define ICMP_ROUTER_DISCOVERY 9
+#define ICMP_ECHO_REQUEST 8
+#define ICMP_ECHO_REPLY 0
+// Layer4
+#define UDP 17
+// mobility support type 
+#define MOBILE_IP_REGISTRATION_REQUEST 1
+#define MOBILE_IP_REGISTRATION_REPLY 3
+
+#define UDP_PORT_NUM_RESERVED_FOR_MOBILE_IP_REG_REQ 434
+
+#define IP_HOST_MULTICAST_ADDR "224.0.0.2"
+#define MAX_BUF_SIZE 512
+#define MAX_NXT_HOPS 4
+
+#define MAX_COST_METRIC 255
+#define MIN_COST_METRIC 1
+
+#endif
