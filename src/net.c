@@ -1,3 +1,7 @@
+/* 
+  setting up network props
+*/
+
 #include "../include/hash.h"
 #include "../include/utils.h"
 #include "../include/graph.h"
@@ -10,9 +14,6 @@ extern rt_entry_t* add_route_entry(node_t *router, char *dst, char mask, char *g
 
 unsigned char* generate_mac(char *node_name, char *intf_name);
 
-// bool_t IS_IF_UP(interface_t *intf){
-//   return (intf->intf_nw_props.if_up == TRUE) ? TRUE : FALSE;
-// } 
 
 void convert_ip_from_int_to_str(unsigned int ip_addr, char *output_buffer){
   inet_ntop(AF_INET, &ip_addr, output_buffer, PREFIX_LEN);

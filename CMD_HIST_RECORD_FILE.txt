@@ -1,0 +1,9 @@
+.
+show topology
+.
+show node mobile_node interface statistics
+run spf all
+show node mobile_node interface statistics
+.
+run node mobile_node solicit_msg
+show node mobile_node interface statistics

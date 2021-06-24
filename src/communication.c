@@ -11,13 +11,10 @@
 
 static char recv_buffer[MAX_PKT_BUF_SIZE * NUM_RECV_BUF];
 static char send_buffer[MAX_PKT_BUF_SIZE * NUM_SEND_BUF];
-// static char send_buffer[MAX_PKT_BUF_SIZE];
 
 pthread_mutex_t recvd_mut= PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t recvd_sig= PTHREAD_COND_INITIALIZER;
 
-// pthread_mutex_t sent_mut= PTHREAD_MUTEX_INITIALIZER;
-// pthread_cond_t sent_sig= PTHREAD_COND_INITIALIZER;
 char is_recvd = 0;
 // char is_sent = 0;
 
@@ -188,7 +185,6 @@ static void* init_pkt_receiver(void* topo) {
     for(int i = 0 ; i < graph->table_size; i++) {
       if(!(graph->table_ptr[i].is_entry)) continue;
       if(FD_ISSET(((node_t *)(graph->table_ptr[i].entry))->udp_sock_fd, &active_fds)) {
-        // printf("one time : %s\n", ((node_t *)(graph->table_ptr[i].entry))->name);
         start_fd_handler_thread(graph->table_ptr[i].entry);
       }
     }
@@ -289,18 +285,15 @@ int send_pkt(char *pkt, unsigned int pkt_size, interface_t *interface){
   
   //increase tx counter
   interface->intf_nw_props.tx_counter++;
-  //printf("port : %d, to %s\n", (nbr_node_intf->node->udp_port_no),nbr_node_intf->name);
   config_nw_addr(&receiver, "127.0.0.1", nbr_node_intf->node->udp_port_no, 0, 0);
 
   int available_slot = consumer(SEND_BUF);
-  //printf("available send : %d\n", available_slot);
   char* send_buf = send_buffer + MAX_PKT_BUF_SIZE*available_slot;
 
   int name_size = strlen(nbr_node_intf->name);
   strncpy(send_buf, nbr_node_intf->name, name_size);
   send_buf[name_size] = '\0';
 
-  // pkt_shift_toright(send_buffer+name_size+1, pkt, pkt_size, MAX_PKT_BUF_SIZE - (name_size+1));
 
   memcpy(send_buf+name_size+1, pkt, pkt_size);
   
@@ -311,7 +304,6 @@ int send_pkt(char *pkt, unsigned int pkt_size, interface_t *interface){
 
   bytes_sent = sendto(sockfd, send_buf, pkt_size + name_size + 1, 0, (struct sockaddr*)&receiver, sizeof(struct sockaddr));
 
-  //printf("i, send :%d\n", bytes_sent);
   
    memset(send_buf, 0, MAX_PKT_BUF_SIZE);
   producer(SEND_BUF);
