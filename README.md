@@ -10,3 +10,24 @@
 - [ ] fragmentation
 - [ ] timer
 
+* ### How to test this project
+
+1. **Download this repo**
+2. **Makefile**
+  ```Makefile
+  make
+  ```
+3. **run .exe file**
+  ```
+  ./test.exe
+  ```
+4. **view some commands you can make**
+  ```
+  .
+  ```
+  this will show you commands list like this
+  
+* ### to remove *.o files or *.exe files
+```Makefile
+make clean
+```
