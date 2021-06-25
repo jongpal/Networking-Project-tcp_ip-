@@ -20,7 +20,7 @@
   3. _include that topology function to **test/testapp.c** file_ 
 
 
-* ### How to test this project
+* ### to test this project
 
   1. Download this repo
   2. Makefile
